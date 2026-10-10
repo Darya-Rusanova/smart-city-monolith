@@ -1,0 +1,35 @@
+services:
+
+  monolith-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: monolith_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - monolith-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+  monolith:
+    build: .
+    restart: on-failure
+    ports:
+      - "8090:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://monolith-db:3306/monolith_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      JWT_SECRET: ${JWT_SECRET:?Не задан JWT_SECRET в файле .env}
+      TZ: Asia/Irkutsk
+    depends_on:
+      monolith-db:
+        condition: service_healthy
+
+volumes:
+  monolith-data:
