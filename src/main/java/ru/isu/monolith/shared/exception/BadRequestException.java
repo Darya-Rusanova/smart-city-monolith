@@ -1,4 +1,4 @@
-package ru.isu.monolith.modules.utility.exception;
+package ru.isu.monolith.shared.exception;
 
 public class BadRequestException extends RuntimeException {
     public BadRequestException(String message) {

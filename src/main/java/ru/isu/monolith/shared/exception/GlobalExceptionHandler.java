@@ -1,4 +1,4 @@
-package ru.isu.monolith.modules.utility.exception;
+package ru.isu.monolith.shared.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
