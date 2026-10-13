@@ -31,16 +31,19 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator/health").permitAll()
-
-                        .requestMatchers(HttpMethod.POST, "/issues").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/issues").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/issues/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/issues/**").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.POST, "/notifications").permitAll()
                         .requestMatchers(HttpMethod.GET, "/notifications/my").hasAnyRole("USER", "ADMIN")
+
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
                 )
-                .exceptionHandling(e -> e.authenticationEntryPoint(
-                        new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+                .exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                        .accessDeniedHandler((request, response, ex) ->
+                                response.sendError(HttpStatus.FORBIDDEN.value(), "Forbidden")))
                 .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

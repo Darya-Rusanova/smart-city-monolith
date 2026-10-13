@@ -23,5 +23,5 @@ jwt:
 
 logging:
   level:
-    ru.isu.cityinfra: DEBUG
+    ru.isu.monolith: DEBUG
     org.springframework.web: INFO

@@ -56,7 +56,7 @@ public class IssueService {
                 .build();
 
         Issue saved = issueRepository.save(issue);
-        events.publishEvent(new IssueCreatedEvent(saved.getId(), userId, saved.getDescription()));
+        events.publishEvent(new IssueCreatedEvent(saved.getId(), saved.getUserId()));
         log.info("Создана заявка №{}",saved.getId());
         return toDto(saved);
     }
@@ -93,8 +93,7 @@ public class IssueService {
             issue.setUpdatedAt(LocalDateTime.now());
             Issue saved = issueRepository.save(issue);
             log.info("Статус заявки №{} сменился с {} на {}", id,old.getDisplayName(),saved.getStatus().getDisplayName());
-            events.publishEvent(new IssueStatusUpdatedEvent(saved.getId(), userId, saved.getStatus()));
-
+            events.publishEvent(new IssueStatusUpdatedEvent(saved.getId(), saved.getUserId(), saved.getStatus().getDisplayName()));
             return toDto(saved);
         }
         else{
