@@ -8,10 +8,10 @@ import ru.isu.monolith.modules.utility.enums.IssueStatus;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "issues", indexes = {
-        @Index(name = "idx_issues_user", columnList = "user_id"),
-        @Index(name = "idx_issues_status", columnList = "status"),
-        @Index(name = "idx_issues_category", columnList = "category")
+@Table(name = "utility_issue", indexes = {
+        @Index(name = "idx_utility_issue_user", columnList = "user_id"),
+        @Index(name = "idx_utility_issue_status", columnList = "status"),
+        @Index(name = "idx_utility_issue_category", columnList = "category")
 })
 @Getter
 @Setter
