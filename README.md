@@ -63,21 +63,13 @@ SQL-скрипты (sql/01-utility.sql, sql/02-notification.sql) создают 
 - **Git**
 - **Java 17** (для локальной разработки)
 
-## Быстрый старт
-
-### Требования
-
-- **Docker Desktop** (WSL 2)
-- **Git**
-- **Java 17** (для локальной разработки)
-
 ### Установка
 
 **1. Клонировать репозиторий:**
  
 ```bash
-git clone https://github.com/Darya-Rusanova/city-infrastructure.git
-cd city-infrastructure
+git clone https://github.com/Darya-Rusanova/smart-city-monolith.git
+cd smart-city-monolith
 ```
  
 **2. Создать файл `.env`:**
