@@ -130,22 +130,13 @@ http://localhost:8080
 ADMIN — видит все заявки, меняет статусы, управляет пользователями и датчиками.
 USER — видит только свои заявки, брони, счета.
 
-## Основные эндпоинты без изменений
+## Основные эндпоинты 
 
 | Метод | URL | Роли | Сервис |
 |---|---|---|---|
-| POST | /auth/register | все | auth |
-| POST | /auth/login | все | auth |
-| GET | /users/me | USER, ADMIN | auth |
-| GET | /vehicles | USER, ADMIN | transport |
-| GET | /parking | USER, ADMIN | transport |
-| POST | /parking/{id}/reserve | USER, ADMIN | transport |
 | POST | /issues | USER, ADMIN | monolith (utility) |
 | GET | /issues | USER, ADMIN | monolith (utility) |
 | PUT | /issues/{id} | ADMIN | monolith (utility) |
-| GET | /sensors | USER, ADMIN | environment |
-| GET | /accounts/{userId}/invoices | USER, ADMIN | billing |
-| POST | /payments | USER, ADMIN | billing |
-| POST | /payments/webhook/success | все (с X-Webhook-Secret) | billing |
 | POST | /notifications | внутренний | monolith (notification) |
 | GET | /notifications/my | USER, ADMIN | monolith (notification) |
+
